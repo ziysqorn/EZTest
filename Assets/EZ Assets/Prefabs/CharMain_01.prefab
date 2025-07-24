@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 1088322454226603662}
   - component: {fileID: 6308315225271610887}
   - component: {fileID: 6257993406077692037}
+  - component: {fileID: -853006845914927477}
   m_Layer: 0
   m_Name: CharMain_01
   m_TagString: Player
@@ -266,8 +267,8 @@ MonoBehaviour:
   maxHealth: 10
   curHealth: 10
   speed: 1
-  IA_Move: {fileID: 8665246116571380434, guid: faa596f4360a327459c5058fe239871e, type: 3}
-  IA_Attack: {fileID: 5789433064543894128, guid: faa596f4360a327459c5058fe239871e, type: 3}
+  animator: {fileID: 0}
+  attackClip: {fileID: 7400000, guid: 83c5b0264a206944e9830c9291cd8780, type: 2}
 --- !u!114 &6308315225271610887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +326,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-853006845914927477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122972254015428975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca3fcc4b2f48fc4a90eb2ff554e3ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2211893352704014900
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,4 +1435,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 074ad633050f4264f8fd11a4a0a001b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: {fileID: 1088322454226603662}

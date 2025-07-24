@@ -17,9 +17,15 @@ public class HandDetector : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-        if (owner != null && other.gameObject != owner.gameObject && !other.tag.Equals(owner.tag))
+        if (owner != null && other && other.gameObject && other.gameObject != owner.gameObject && !other.tag.Equals(owner.tag))
         {
-            Debug.Log("Hehe");
+            CustomStateMachine stateMachine = owner.GetComponent<CustomStateMachine>();
+            ICharacterState characterState = stateMachine.GetCurrentState();
+            if(characterState.GetType() == typeof(AttackState))
+            {
+				Debug.Log("Hehe");
+				GameplayStatics.ApplyDamage(other.gameObject, 5, owner.gameObject, gameObject);
+			}
         }
 	}
 }

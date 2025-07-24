@@ -14,7 +14,7 @@ public class Ally : AICharacter, IMoveable, IDamageable, IAttackable
         
     }
 
-	public void Move()
+	public void Move(in Vector3 moveDirection)
 	{
 
 	}

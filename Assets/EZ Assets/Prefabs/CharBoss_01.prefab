@@ -1245,6 +1245,8 @@ GameObject:
   - component: {fileID: 7905174323926392977}
   - component: {fileID: 1943187249992631569}
   - component: {fileID: 2140899591207309183}
+  - component: {fileID: 1088641431928883312}
+  - component: {fileID: 9177227540110384440}
   m_Layer: 0
   m_Name: CharBoss_01
   m_TagString: Enemy
@@ -1279,7 +1281,7 @@ Animator:
   m_GameObject: {fileID: 7421653487955196459}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5250d1387f2f45c45b0e0e8bca89b36f, type: 3}
-  m_Controller: {fileID: 9100000, guid: c332f883d3567574b982bf4d4f78de8a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 689b9f268fc9de447b295d4fc7396004, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1314,6 +1316,35 @@ CapsuleCollider:
   m_Height: 1.0688059
   m_Direction: 1
   m_Center: {x: 0.0014181697, y: 0.5022112, z: -0.006186351}
+--- !u!114 &1088641431928883312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421653487955196459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dc2488411e239f43a2fbc4383542b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  curHealth: 0
+  speed: 1
+  animator: {fileID: 0}
+  hurtClip: {fileID: 7400000, guid: b54446a8d01671248a70cb51aafbc781, type: 2}
+--- !u!114 &9177227540110384440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7421653487955196459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca3fcc4b2f48fc4a90eb2ff554e3ff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7503358911111480636
 GameObject:
   m_ObjectHideFlags: 0
