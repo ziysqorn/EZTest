@@ -38,14 +38,18 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 
 	public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)
 	{
-		curHealth -= damageAmount;
-		if (curHealth <= 0) {
-			Die();
-		}
-		else
+		if(stateMachine.GetCurrentState().GetType() != typeof(DieState))
 		{
-			stateMachine.ChangeState(new HurtState(this));
-			if(hurtClip) StartCoroutine(stateMachine.ChangeStateDelay(new IdleState(gameObject), hurtClip.length));
+			curHealth -= damageAmount;
+			if (curHealth <= 0)
+			{
+				Die();
+			}
+			else
+			{
+				stateMachine.ChangeState(new HurtState(this));
+				if (hurtClip) StartCoroutine(stateMachine.ChangeStateDelay(new IdleState(gameObject), hurtClip.length));
+			}
 		}
 	}
 }

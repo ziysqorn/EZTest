@@ -6,6 +6,7 @@ public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
 {
     private PlayerInput playerInput;
     [SerializeField] protected AnimationClip attackClip;
+    public Camera characterCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

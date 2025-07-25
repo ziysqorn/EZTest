@@ -32,6 +32,8 @@ public class StartMenu : MonoBehaviour
     {
         Debug.Log("One vs One click");
         Instantiate(prefData?.Pref_ControlUI);
+        CameraManager.instance?.CameraSetup();
+        SpawnManager.instance?.SpawnCharacter(1, 0);
         Destroy(gameObject);
     }
 
