@@ -26,8 +26,14 @@ public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
 	}
 	public void Move(in Vector3 moveDirection)
     {
-		Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 10.0f * Time.deltaTime);
+        Vector2 point = new Vector2(moveDirection.x, moveDirection.z);
+		float dot = Vector2.Dot(point, Vector2.up);
+        float mag = point.magnitude * Vector2.up.magnitude;
+        float cos = Mathf.Clamp(dot / mag, -1.0f, 1.0f);
+        float angle = Mathf.Acos(cos) * Mathf.Rad2Deg;
+        angle = point.x > 0 ? angle : -angle;
+        Quaternion targetRotation = Quaternion.Euler(0.0f, angle + transform.eulerAngles.y, 0.0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2.5f * Time.deltaTime);
 		transform.Translate(Vector3.forward * Time.deltaTime * speed);
 	}
 
@@ -52,6 +58,7 @@ public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
             if(moveDirection.x + moveDirection.y != 0.0f)
             {
 				stateMachine.ChangeState(new WalkState(this, new Vector3(moveDirection.x, 0.0f, moveDirection.y)));
+                stateMachine.GetCurrentState().Update();
             }
             else if(stateMachine.GetCurrentState().GetType() == typeof(WalkState))
             {

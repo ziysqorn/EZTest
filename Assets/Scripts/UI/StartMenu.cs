@@ -34,6 +34,7 @@ public class StartMenu : MonoBehaviour
         Instantiate(prefData?.Pref_ControlUI);
         CameraManager.instance?.CameraSetup();
         SpawnManager.instance?.SpawnCharacter(1, 0);
+        GameInstance.instance?.SetEnemyCount(1);
         Destroy(gameObject);
     }
 
@@ -41,6 +42,9 @@ public class StartMenu : MonoBehaviour
     {
 		Debug.Log("One vs Many click");
 		Instantiate(prefData?.Pref_ControlUI);
+        CameraManager.instance?.CameraSetup();
+        SpawnManager.instance?.SpawnCharacter(2, 0);
+		GameInstance.instance?.SetEnemyCount(2);
 		Destroy(gameObject);
 	}
 
@@ -48,6 +52,9 @@ public class StartMenu : MonoBehaviour
     {
 		Debug.Log("Many vs Many click");
 		Instantiate(prefData?.Pref_ControlUI);
+        CameraManager.instance?.CameraSetup();
+        SpawnManager.instance?.SpawnCharacter(2, 1);
+        GameInstance.instance.SetEnemyCount(2);
 		Destroy(gameObject);
 	}
 }

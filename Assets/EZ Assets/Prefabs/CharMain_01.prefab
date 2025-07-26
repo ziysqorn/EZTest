@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 10
-  speed: 1
+  speed: 0.75
   animator: {fileID: 0}
   attackClip: {fileID: 7400000, guid: 83c5b0264a206944e9830c9291cd8780, type: 2}
   characterCamera: {fileID: 1767797785564114079}

@@ -40,18 +40,18 @@ public class WalkState : ICharacterState
 		IMoveable moveable = owner as IMoveable;
 		if (moveable != null) {
 			owner.animator.SetBool("isMoving", true);
-			moveable.Move(moveDirection);
 		}
 	}
 	public void Update()
 	{
-
+		IMoveable moveable = owner as IMoveable;
+		if (moveable != null)
+			moveable.Move(moveDirection);
 	}
 	public void Exit()
 	{
 		IMoveable moveable = owner as IMoveable;
-		if (moveable != null)
-		{
+		if (moveable != null) {
 			owner.animator.SetBool("isMoving", false);
 		}
 	}
@@ -127,6 +127,7 @@ public class HurtState : ICharacterState
 	}
 	public bool CanSwitchTo(ICharacterState inState)
 	{
+		if (inState.GetType() == typeof(HurtState)) return false;
 		return true;
 	}
 }

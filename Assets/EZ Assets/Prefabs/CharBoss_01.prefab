@@ -1330,7 +1330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 10
   curHealth: 0
-  speed: 1
+  speed: 0.5
   animator: {fileID: 0}
   hurtClip: {fileID: 7400000, guid: b54446a8d01671248a70cb51aafbc781, type: 2}
 --- !u!114 &9177227540110384440

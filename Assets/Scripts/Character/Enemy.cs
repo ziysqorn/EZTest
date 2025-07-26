@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
@@ -17,12 +19,20 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
     // Update is called once per frame
     void Update()
     {
-        
+		stateMachine.GetCurrentState().Update();
     }
 
 	public void Move(in Vector3 moveDirection)
 	{
+		transform.Translate(moveDirection * Time.deltaTime * speed);
+	}
 
+	protected override void MakeDecision()
+	{
+		int directionChoosing = UnityEngine.Random.Range(0, moveDirections.Count);
+		Vector3 chosenDirection = moveDirections[directionChoosing];
+		stateMachine.ChangeState(new WalkState(this, chosenDirection));
+		StartCoroutine(MoveToIdle(moveTime));
 	}
 
 	public void Attack()
@@ -30,15 +40,26 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 
 	}
 
+	protected IEnumerator MoveToIdle(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		stateMachine.ChangeState(new IdleState(gameObject));
+		StartCoroutine(MakeDecisionAfterDelay(restDuration));
+
+	}
+
+
 	public void Die()
 	{
 		stateMachine.ChangeState(new DieState(this));
+		GameInstance.instance?.DecreaseEnemyCount(1);
 		Debug.Log("Enemy died");
 	}
 
 	public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)
 	{
-		if(stateMachine.GetCurrentState().GetType() != typeof(DieState))
+		Type currentStateType = stateMachine.GetCurrentState().GetType();
+		if (currentStateType != typeof(HurtState) && currentStateType != typeof(DieState))
 		{
 			curHealth -= damageAmount;
 			if (curHealth <= 0)
