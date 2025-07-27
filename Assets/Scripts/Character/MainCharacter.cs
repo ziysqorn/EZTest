@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
 {
@@ -33,8 +34,8 @@ public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
         float angle = Mathf.Acos(cos) * Mathf.Rad2Deg;
         angle = point.x > 0 ? angle : -angle;
         Quaternion targetRotation = Quaternion.Euler(0.0f, angle + transform.eulerAngles.y, 0.0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 2.5f * Time.deltaTime);
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 1.5f * Time.deltaTime);
+		characterController.Move(transform.forward * Time.deltaTime * speed);
 	}
 
     public void Attack()

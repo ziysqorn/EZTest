@@ -39,6 +39,8 @@ public class SpawnManager : MonoBehaviour
                 GameObject GB_spawnPoint = spawnPointList[i].gameObject;
                 if (GB_spawnPoint != null) {
 					GameObject GB_enemyChar = Instantiate(prefData?.Pref_Enemy, GB_spawnPoint.transform.position, GB_spawnPoint.transform.rotation);
+                    Enemy enemyChar = GB_enemyChar.GetComponent<Enemy>();
+                    if (enemyChar != null) enemyChar.IncreaseRestDuration(3.0f * i);
                     --enemyCount;
 				}
                 

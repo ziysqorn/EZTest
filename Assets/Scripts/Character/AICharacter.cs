@@ -10,8 +10,8 @@ public abstract class AICharacter : Character
         new Vector3(0.0f, 0.0f, 1.0f),
         new Vector3(0.0f, 0.0f, -1.0f)
     };
-    protected float moveTime = 1.5f;
-    protected float restDuration = 3.5f;
+    protected float moveTime = 2.0f;
+    [SerializeField] protected float restDuration = 3.5f;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	protected override void Start()
     {
@@ -33,5 +33,10 @@ public abstract class AICharacter : Character
     {
         yield return new WaitForSeconds(delay);
         MakeDecision();
+    }
+
+    public void IncreaseRestDuration(float inDuration)
+    {
+        restDuration += inDuration;
     }
 }
