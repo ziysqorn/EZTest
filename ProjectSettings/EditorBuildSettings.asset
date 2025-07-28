@@ -4,7 +4,13 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/EZ Assets/Scenes/StartLevel.unity
+    guid: 3292a37e4b29db542989788457def318
+  - enabled: 1
+    path: Assets/EZ Assets/Scenes/MainLevel.unity
+    guid: 5777deb5d4f9b544e8cbb0572f2d4933
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

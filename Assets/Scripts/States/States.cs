@@ -58,8 +58,8 @@ public class WalkState : ICharacterState
 
 	public bool CanSwitchTo(ICharacterState inState)
 	{
-		if (inState.GetType() == typeof(WalkState) || inState.GetType() == typeof(IdleState)) return true;
-		return false;
+		if (inState.GetType() == typeof(AttackState)) return false;
+		return true;
 	}
 }
 
@@ -153,7 +153,7 @@ public class DieState : ICharacterState
 	}
 	public bool CanSwitchTo(ICharacterState inState)
 	{
-		return true;
+		return false;
 	}
 }
 

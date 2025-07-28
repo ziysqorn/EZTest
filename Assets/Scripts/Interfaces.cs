@@ -8,6 +8,7 @@ public interface IMoveable
 public interface IAttackable
 {
     public void Attack();
+    public int GetDamage();
 }
 
 public interface IDamageable

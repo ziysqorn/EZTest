@@ -1,13 +1,17 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
-public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
+public class MainCharacter : Character, IMoveable, IDieable, IDamageable, IAttackable
 {
     private PlayerInput playerInput;
     [SerializeField] protected AnimationClip attackClip;
-    public Camera characterCamera;
+	[SerializeField] protected AnimationClip hurtClip;
+	public Camera characterCamera;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -40,13 +44,43 @@ public class MainCharacter : Character, IMoveable, IDamageable, IAttackable
 
     public void Attack()
     {
-        Debug.Log("Attack");
         if (attackClip) StartCoroutine(stateMachine.ChangeStateDelay(new IdleState(gameObject), attackClip.length - 0.3f));
 	}
 
+    public int GetDamage()
+    {
+        return 5;
+    }
+
+    public void Die()
+    {
+		stateMachine.ChangeState(new DieState(this));
+		Debug.Log("Main character died !");
+        StartCoroutine(EndGame());
+    }
+
+    protected IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(5.0f);
+        SceneManager.LoadScene("StartLevel");
+    }
+
     public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)
     {
-
+		Type currentStateType = stateMachine.GetCurrentState().GetType();
+		if (currentStateType != typeof(HurtState) && currentStateType != typeof(DieState))
+		{
+			curHealth -= damageAmount;
+			if (curHealth <= 0)
+			{
+				Die();
+			}
+			else
+			{
+				stateMachine.ChangeState(new HurtState(this));
+				if (hurtClip) StartCoroutine(stateMachine.ChangeStateDelay(new IdleState(gameObject), hurtClip.length));
+			}
+		}
 	}
 
     public void CheckInput()

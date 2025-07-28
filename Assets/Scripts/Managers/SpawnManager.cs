@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public int enemyCount = 0;
+    public int allyCount = 0;
     public static SpawnManager instance;
     [SerializeField] protected PrefData prefData;
 	void Awake()
@@ -29,7 +31,7 @@ public class SpawnManager : MonoBehaviour
         
     }
 
-    public void SpawnCharacter(int enemyCount, int allyCount)
+    public void SpawnCharacter()
     {
         if(enemyCount > 0)
         {

@@ -6,9 +6,13 @@ using UnityEngine.EventSystems;
 public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 {
 	[SerializeField] protected AnimationClip hurtClip;
+	[SerializeField] protected AnimationClip attackClip;
+	[SerializeField] protected Vector3 detectBoxSize;
+	[SerializeField] protected float maxDetectDis;
 	protected Quaternion? targetRotation = null;
 	protected Quaternion? selfToPlayerRotation = null;
 	protected bool canMove = false;
+	protected bool canAttack = true;
 	protected bool canLookAtOpponent = false;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Awake()
@@ -26,6 +30,7 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
     {
 		stateMachine.GetCurrentState().Update();
 		LookAtOpponent();
+		if(canAttack) DetectToAttack();
 	}
 
 	public void Move(in Vector3 moveDirection)
@@ -33,7 +38,6 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 		Rotate(moveDirection);
 		if (canMove)
 		{
-			Debug.Log("isMoving");
 			characterController.Move(transform.forward * Time.deltaTime * speed);
 		}
 	}
@@ -93,6 +97,34 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 		}
 	}
 
+	protected bool DetectToAttack()
+	{
+		LayerMask mask = 1 << LayerMask.NameToLayer("Character");
+		RaycastHit hit;
+		bool detected = Physics.BoxCast(transform.position, detectBoxSize / 2f, transform.forward, out hit, Quaternion.identity, maxDetectDis, mask);
+		if (detected && hit.collider.gameObject.tag != gameObject.tag) {
+			Character character = hit.collider.gameObject?.GetComponent<Character>();
+			if (character != null)
+			{
+				CustomStateMachine customStateMachine = character.gameObject.gameObject.GetComponent<CustomStateMachine>();
+				if (customStateMachine?.GetCurrentState().GetType() != typeof(DieState))
+				{
+					stateMachine.ChangeState(new AttackState(this));
+					canAttack = false;
+					StartCoroutine(AttackRecover(restDuration));
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	protected IEnumerator AttackRecover(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+		canAttack = true;
+	}
+
 
 	protected override void MakeDecision()
 	{
@@ -104,7 +136,12 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 
 	public void Attack()
 	{
+		if (attackClip) stateMachine.ChangeStateDelay(new IdleState(gameObject), attackClip.length - 0.5f);
+	}
 
+	public int GetDamage()
+	{
+		return 5;
 	}
 
 	protected IEnumerator MoveToIdle(float delay)
@@ -123,6 +160,7 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 		stateMachine.ChangeState(new DieState(this));
 		GameInstance.instance?.DecreaseEnemyCount(1);
 		Debug.Log("Enemy died");
+		StopAllCoroutines();
 	}
 
 	public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)

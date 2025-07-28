@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StartMenu : MonoBehaviour
@@ -6,7 +7,6 @@ public class StartMenu : MonoBehaviour
     [SerializeField] private Button btn_OneVOne;
     [SerializeField] private Button btn_OneVMany;
     [SerializeField] private Button btn_ManyVMany;
-    [SerializeField] private PrefData prefData;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,30 +31,39 @@ public class StartMenu : MonoBehaviour
 	void OneVOneClick()
     {
         Debug.Log("One vs One click");
-        Instantiate(prefData?.Pref_ControlUI);
-        CameraManager.instance?.CameraSetup();
-        SpawnManager.instance?.SpawnCharacter(1, 0);
+        if(SpawnManager.instance != null)
+        {
+            SpawnManager.instance.enemyCount = 1;
+			SpawnManager.instance.allyCount = 0;
+		}
         GameInstance.instance?.SetEnemyCount(1);
-        Destroy(gameObject);
+        GameInstance.instance?.ResetGame();
+        SceneManager.LoadScene("MainLevel");
     }
 
     void OneVManyClick()
     {
 		Debug.Log("One vs Many click");
-		Instantiate(prefData?.Pref_ControlUI);
-        CameraManager.instance?.CameraSetup();
-        SpawnManager.instance?.SpawnCharacter(2, 0);
+		if (SpawnManager.instance != null)
+		{
+			SpawnManager.instance.enemyCount = 2;
+			SpawnManager.instance.allyCount = 0;
+		}
 		GameInstance.instance?.SetEnemyCount(2);
-		Destroy(gameObject);
+		GameInstance.instance?.ResetGame();
+		SceneManager.LoadScene("MainLevel");
 	}
 
     void ManyVManyClick()
     {
 		Debug.Log("Many vs Many click");
-		Instantiate(prefData?.Pref_ControlUI);
-        CameraManager.instance?.CameraSetup();
-        SpawnManager.instance?.SpawnCharacter(2, 1);
-        GameInstance.instance.SetEnemyCount(2);
-		Destroy(gameObject);
+		if (SpawnManager.instance != null)
+		{
+			SpawnManager.instance.enemyCount = 2;
+			SpawnManager.instance.allyCount = 1;
+		}
+		GameInstance.instance?.SetEnemyCount(2);
+		GameInstance.instance?.ResetGame();
+		SceneManager.LoadScene("MainLevel");
 	}
 }

@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameInstance : MonoBehaviour
 {
     public static GameInstance instance;
     protected int enemyCount = 0;
+    protected int curEnemyCount = 0;
     protected int levelCount = 10;
+    protected int curLevelCount = 0;
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	void Awake()
 	{
@@ -41,7 +44,16 @@ public class GameInstance : MonoBehaviour
 
     public void SetEnemyCount(int count)
     {
-        if(count >= 0) enemyCount = count;
+        if(count >= 0)
+        {
+			enemyCount = count;
+            curEnemyCount = count;
+		}
+    }
+
+    public void ResetGame()
+    {
+        curLevelCount = 1;
     }
 
     public void SetLevelCount(int count)
@@ -51,8 +63,8 @@ public class GameInstance : MonoBehaviour
 
     public void DecreaseEnemyCount(int amount)
     {
-        enemyCount -= amount;
-        if(enemyCount <= 0)
+        curEnemyCount -= amount;
+        if(curEnemyCount <= 0)
         {
             EndLevel();
         }
@@ -61,5 +73,11 @@ public class GameInstance : MonoBehaviour
     public void EndLevel()
     {
         Debug.Log("All enemies defeated !");
+        if(curLevelCount == levelCount)
+        {
+            SceneManager.LoadScene("StartLevel");
+        }
+        ++curLevelCount;
+        SceneManager.LoadScene("MainLevel");
     }
 }

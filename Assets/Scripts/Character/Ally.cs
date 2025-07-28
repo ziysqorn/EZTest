@@ -24,6 +24,11 @@ public class Ally : AICharacter, IMoveable, IDamageable, IAttackable
 
 	}
 
+	public int GetDamage()
+	{
+		return 0;
+	}
+
 	public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)
 	{
 

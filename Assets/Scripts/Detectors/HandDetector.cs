@@ -23,8 +23,8 @@ public class HandDetector : MonoBehaviour
             ICharacterState characterState = stateMachine.GetCurrentState();
             if(characterState.GetType() == typeof(AttackState))
             {
-				Debug.Log("Hehe");
-				GameplayStatics.ApplyDamage(other.gameObject, 5, owner.gameObject, gameObject);
+                IAttackable attackable = owner.GetComponent<IAttackable>();
+				if(attackable != null) GameplayStatics.ApplyDamage(other.gameObject, attackable.GetDamage(), owner.gameObject, gameObject);
 			}
         }
 	}

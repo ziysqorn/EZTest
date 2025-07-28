@@ -1758,9 +1758,9 @@ GameObject:
   - component: {fileID: 8025268549861323299}
   - component: {fileID: 4161141258026543193}
   - component: {fileID: 170332854981043743}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: charMobLA_01
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

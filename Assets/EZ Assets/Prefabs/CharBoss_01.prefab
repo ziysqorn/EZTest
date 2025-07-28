@@ -785,6 +785,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4312267961578484242}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5118782131268699061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2935664687796402106}
+  - component: {fileID: 3115600596436384883}
+  - component: {fileID: 581078679793585271}
+  m_Layer: 0
+  m_Name: HandDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2935664687796402106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118782131268699061}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3459344509487551161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3115600596436384883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118782131268699061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 074ad633050f4264f8fd11a4a0a001b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 1088641431928883312}
+--- !u!135 &581078679793585271
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5118782131268699061}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.07439105
+  m_Center: {x: 0.000000008020443, y: 0.07276583, z: -0.0014903229}
 --- !u!1 &5595302565240407415
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +1012,7 @@ Transform:
   m_Children:
   - {fileID: 8667635345389178006}
   - {fileID: 3184145214501260076}
+  - {fileID: 2935664687796402106}
   m_Father: {fileID: 930322342376421763}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6133861395800086695
@@ -1249,7 +1317,7 @@ GameObject:
   - component: {fileID: 9177227540110384440}
   - component: {fileID: 1763762733415333624}
   - component: {fileID: 5941594531469476096}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CharBoss_01
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -1336,6 +1404,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   restDuration: 3.5
   hurtClip: {fileID: 7400000, guid: b54446a8d01671248a70cb51aafbc781, type: 2}
+  attackClip: {fileID: 7400000, guid: 83c5b0264a206944e9830c9291cd8780, type: 2}
+  detectBoxSize: {x: 2, y: 2, z: 0.25}
+  maxDetectDis: 0.25
 --- !u!114 &9177227540110384440
 MonoBehaviour:
   m_ObjectHideFlags: 0
