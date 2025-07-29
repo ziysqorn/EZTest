@@ -8,6 +8,10 @@ public class LevelManager : MonoBehaviour
     {
 		Instantiate(prefData?.Pref_ControlUI);
 		SpawnManager.instance?.SpawnCharacter();
+        if(GameInstance.instance != null)
+        {
+			SpawnManager.instance?.SpawnTurrets(GameInstance.instance.GetCurLevelCount() + 2);
+		}   
 		GameObject GB_spawnPoint = FindFirstObjectByType<PlayerSpawnPoint>()?.gameObject;
 		if (GB_spawnPoint != null)
         {

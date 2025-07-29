@@ -158,9 +158,15 @@ public class Enemy : AICharacter, IMoveable, IDamageable, IAttackable, IDieable
 	public void Die()
 	{
 		stateMachine.ChangeState(new DieState(this));
-		GameInstance.instance?.DecreaseEnemyCount(1);
 		Debug.Log("Enemy died");
 		StopAllCoroutines();
+		StartCoroutine(DecreaseSelf());
+	}
+
+	protected IEnumerator DecreaseSelf()
+	{
+		yield return new WaitForSeconds(4.0f);
+		GameInstance.instance?.DecreaseEnemyCount(1);
 	}
 
 	public void TakeDamage(int damageAmount, in GameObject instigator, in GameObject damageCauser)

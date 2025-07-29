@@ -7,4 +7,6 @@ public class PrefData : ScriptableObject
 	[SerializeField] public GameObject Pref_MainChar;
 	[SerializeField] public GameObject Pref_Ally;
 	[SerializeField] public GameObject Pref_Enemy;
+	[SerializeField] public GameObject Pref_Turret;
+	[SerializeField] public GameObject Pref_Bullet;
 }

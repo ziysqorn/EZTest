@@ -41,6 +41,11 @@ public class GameInstance : MonoBehaviour
         return levelCount;
     }
 
+    public int GetCurLevelCount()
+    {
+        return curLevelCount;
+    }
+
 
     public void SetEnemyCount(int count)
     {

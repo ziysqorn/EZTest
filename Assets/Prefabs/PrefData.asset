@@ -16,3 +16,5 @@ MonoBehaviour:
   Pref_MainChar: {fileID: 2122972254015428975, guid: 6e70ac2dd964f7e4798ba322509c7e7a, type: 3}
   Pref_Ally: {fileID: 7211577561630468249, guid: a389451827f7c29409b3feb7eb971647, type: 3}
   Pref_Enemy: {fileID: 7421653487955196459, guid: 775cd3b427d63974d8703d8fc87cc3ce, type: 3}
+  Pref_Turret: {fileID: 3226583421603586234, guid: 027d3d2e3059a8a4497ef9f01a9ac5cc, type: 3}
+  Pref_Bullet: {fileID: 2230831009695458513, guid: 022c85d5176a7644eb304f7be9565115, type: 3}

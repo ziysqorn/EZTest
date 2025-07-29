@@ -1405,8 +1405,8 @@ MonoBehaviour:
   restDuration: 3.5
   hurtClip: {fileID: 7400000, guid: b54446a8d01671248a70cb51aafbc781, type: 2}
   attackClip: {fileID: 7400000, guid: 83c5b0264a206944e9830c9291cd8780, type: 2}
-  detectBoxSize: {x: 2, y: 2, z: 0.25}
-  maxDetectDis: 0.25
+  detectBoxSize: {x: 2, y: 2, z: 0.2}
+  maxDetectDis: 0.2
 --- !u!114 &9177227540110384440
 MonoBehaviour:
   m_ObjectHideFlags: 0
